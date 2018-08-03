@@ -4,7 +4,7 @@
 - Expand make type variables `$(VAR)` in string
 
 Package allow you to access any symbol defined in *make*.
-It might be helpfull to transfer your *Makefile* based project
+It might be helpful to transfer your *Makefile* based project
 to different one.
 
 ## Installation
