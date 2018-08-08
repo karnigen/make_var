@@ -11,7 +11,7 @@ def make_vars(cmd='make -pn', origin=['environment', 'makefile']):
     Generate the (key,value) dict of all variables defined in make process
 
     cmd
-        - "make -pn"
+        - "make -pnB"
         - this command returns all variables defined in Makefile to stdout
         - tested only with gnu make
     origin
@@ -20,6 +20,7 @@ def make_vars(cmd='make -pn', origin=['environment', 'makefile']):
         - = None returns all origins
     '''
     p = subprocess.getoutput(cmd)
+    # even with bad status variables are set
 #    st, p = subprocess.getstatusoutput(cmd)
 #    if st != 0:
 #        print("Error {} in cmd: {}".format(st,cmd))
