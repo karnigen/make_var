@@ -53,4 +53,4 @@ you get
 ## Internals
 
 package is based on GNU make command
-`make -pn`
+`make -pnB`
