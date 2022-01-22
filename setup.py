@@ -5,7 +5,7 @@ with open("Readme.md", "r") as fh:
 
 setuptools.setup(
     name="make_var",
-    version="0.1.0",
+    version="0.4.0",
     author='Tony Karnigen',
     author_email='karnigen@gmail.com',
     description='Retrieve all variables defined by make command',

@@ -6,6 +6,30 @@ import os,sys
 import subprocess
 import re
 
+def make_cmds(cmd='make -pn'):
+    'Generate all make commads'
+    p = subprocess.getoutput(cmd)
+
+    E=[] # executed commands
+    cont=False   # continuation line
+    for line in p.splitlines():
+        line=line.strip()
+        if line.startswith("#"): break
+        newcont=False
+        if line.endswith('\\'): # continuation line
+            line=line.rstrip('\\')
+            line=line.rstrip()
+            newcont=True
+        if cont:
+            E[-1] = E[-1] + " " + line
+        else:
+            E.append(line)
+        cont = newcont
+
+    return E
+
+
+
 def make_vars(cmd='make -pn', origin=['environment', 'makefile']):
     '''
     Generate the (key,value) dict of all variables defined in make process
@@ -26,11 +50,13 @@ def make_vars(cmd='make -pn', origin=['environment', 'makefile']):
 #        print("Error {} in cmd: {}".format(st,cmd))
 #        return None    # user must check this value
 
-    M={}
+
+    M={} # defined macros
     re_var = re.compile(r"^#\s*Variables\b")  # start of variable segment
     re_varend = re.compile(r"^#\s*variable")  # end of variables
     s=None                                    # state of parser
     mname=None
+
     for line in p.splitlines():
         if s is None and re_var.search(line):
             s='var'
@@ -92,6 +118,10 @@ def make_expand(M, val):
 
 if __name__ == '__main__':
     # M=make_vars(origin=None)
+    E = make_cmds()
+    print(E)
+    sys.exit()
+
     M=make_vars()
     print(M.keys())
     # for k,v in sorted(M['makefile'].items()):
