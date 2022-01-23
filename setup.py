@@ -14,6 +14,7 @@ setuptools.setup(
     url='http://github.com/karnigen/make_var',
     packages=setuptools.find_packages(),
     license='LICENSE.txt',
+    platforms=['any'],
 
     classifiers=[
         "Programming Language :: Python :: 3",
